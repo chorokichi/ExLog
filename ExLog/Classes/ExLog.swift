@@ -18,7 +18,6 @@ open class ExLog{
     private static let Debug = false
     #endif
     
-    
     /// 初期設定。AppDelegateのapplicationDidFinishLaunchingで呼び出すことを想定している
     /// - parameter appName: ログファイルを格納するドキュメントフォルダー内のフォルダー名(Init: "DKMacLibraryTest")
     /// - parameter fileName: ログファイル名(Init: "debug-log.log")
@@ -33,6 +32,66 @@ open class ExLog{
         if let shouldFileOutput = shouldFileOutput{
             ShouldFileOutput = shouldFileOutput
         }
+    }
+    
+    /// ログを出力するクラスメソッド
+    open static func log(_ object: Any? = "No Log",
+                         classFile: String = #file,
+                         functionName: String = #function,
+                         lineNumber: Int = #line,
+                         type: ExLogType = .Info,
+                         format: ExLogFormat = .Normal,
+                         printType: PrintType = .normal)
+    {
+        
+        if Debug{
+            let now = Date()
+            
+            let mainMessage = convert(object, by: printType)
+            let classDetail = URL(string: String(classFile))?.lastPathComponent  ?? classFile
+            logFormatMsg(mainMessage,
+                date: now,
+                classDetail: classDetail,
+                functionName: functionName,
+                lineNumber: lineNumber,
+                type: type,
+                format: format,
+                printType: printType)
+        }
+    }
+    
+    private static func convert(_ object:Any?, by type:PrintType) -> String{
+        var printMessage:String = ""
+        switch type{
+        case .normal:
+            if let msg = object{
+                printMessage = "\(msg)"
+            }else{
+                printMessage = "nil"
+            }
+        case .dump:
+            dump(object, to:&printMessage)
+        }
+        return printMessage
+    }
+    
+    /// ログを出力するクラスメソッド
+    private static func logFormatMsg(_ msg: String,
+                         date: Date,
+                         classDetail: String,
+                         functionName: String,
+                         lineNumber: Int,
+                         type: ExLogType,
+                         format: ExLogFormat,
+                         printType: PrintType)
+    {
+        let formatMsg = format.string(emoji: type.getEmoji(),
+                                      date: date,
+                                      msg: msg,
+                                      functionName: functionName,
+                                      classDetail: classDetail,
+                                      lineNumber: lineNumber)
+        output(formatMsg, printType:printType)
     }
     
     /// デバッグ時しか実行したくないコードによってのみ取得できるログを出力するメソッド。コールバックメソッドの返り値がログ出力される。
@@ -65,6 +124,7 @@ open class ExLog{
         }
     }
     
+    /// 改行を指定個出力するクラスメソッド
     open static func emptyLine(_ lineNums:Int = 1){
         if Debug{
             var msg = ""
@@ -75,6 +135,7 @@ open class ExLog{
         }
     }
     
+    /// 特定文字の指定した個数つなげたものを出力するクラスメソッド
     open static func separatorLine(_ character:String = "-", repeatNum:Int = 10){
         if Debug{
             var msg = ""
@@ -85,55 +146,29 @@ open class ExLog{
             history = msg
         }
     }
-    
-    open static func log(_ object: Any? = "No Log",
-                    classFile: String = #file,
-                    functionName: String = #function,
-                    lineNumber: Int = #line,
-                    type: ExLogType = .Info,
-                    format: ExLogFormat = .Normal,
-                    printType: PrintType = .normal)
-    {
-        if Debug{
-            
-            let objString = object ?? "nil"
-            let classDetail = URL(string: String(classFile))?.lastPathComponent  ?? classFile
-            let formatMsg = format.string(emoji: type.getEmoji(),
-                                          date: Date(),
-                                          msg: objString,
-                                          functionName: functionName,
-                                          classDetail: classDetail,
-                                          lineNumber: lineNumber)
-            output(formatMsg, printType:printType)
-        }
-    }
-    
+}
+
+
+// - MARK: - ExLogType固定のクラスメソッド
+extension ExLog{
     open static func error(_ object: Any? = "No Log",
-                         classFile: String = #file,
-                         functionName: String = #function,
-                         lineNumber: Int = #line,
-                         format: ExLogFormat = .Normal){
-        log(object, classFile: classFile, functionName:functionName, lineNumber:lineNumber, type: .Error, format:format)
-    }
-    
-    open static func important(_ object: Any? = "No Log",
                            classFile: String = #file,
                            functionName: String = #function,
                            lineNumber: Int = #line,
                            format: ExLogFormat = .Normal){
-        log(object, classFile: classFile, functionName:functionName, lineNumber:lineNumber, type: .Important, format:format)
+        log(object, classFile: classFile, functionName:functionName, lineNumber:lineNumber, type: .Error, format:format)
     }
     
-    static func printPath(printType: PrintType = .normal)
-    {
-        let supportDirectory = FileManager.SearchPathDirectory.applicationSupportDirectory
-        let searchPathDomainMask = FileManager.SearchPathDomainMask.allDomainsMask
-        let directories = NSSearchPathForDirectoriesInDomains(supportDirectory, searchPathDomainMask, true)
-        output(directories.first ?? "見つかりませんでした", printType:printType)
+    open static func important(_ object: Any? = "No Log",
+                               classFile: String = #file,
+                               functionName: String = #function,
+                               lineNumber: Int = #line,
+                               format: ExLogFormat = .Normal){
+        log(object, classFile: classFile, functionName:functionName, lineNumber:lineNumber, type: .Important, format:format)
     }
 }
 
-/// Util系
+// - MARK: - Util系
 extension ExLog{
     // CoreDataのファイルなどを保存するフォルダーのパスを取得するメソッド
     open static func getFolderPathHavingCoreDataFile() -> String
@@ -174,7 +209,7 @@ extension ExLog{
     }
 }
 
-// 出力先制御
+// - MARK: - 出力先制御
 extension ExLog{
     private static var AppName = "ExLog"
     private static var FileName = "debug-log.log"
@@ -187,20 +222,11 @@ extension ExLog{
     // 直前の表示内容を記録している文字列
     open static var history:String = ""
     private static func output(_ msg:String, printType:PrintType = .normal){
-        var printMessage:String = ""
-        switch printType{
-        case .normal:
-            printMessage = msg
-        case .dump:
-            dump(msg, to:&printMessage)
-        }
-        
-        print(printMessage)
-        
+        print(msg)
         if ShouldFileOutput{
-            outputToFile(printMessage)
+            outputToFile(msg)
         }
-        history = printMessage
+        history = msg
     }
     
     open static func createOrGetFolderForLog() -> URL?{
@@ -264,6 +290,7 @@ extension ExLog{
     }
 }
 
+// - MARK: - ログの種類(頭につけるタグ)
 public enum ExLogType : String{
     case Info = ""
     case Important = "[Important]"
@@ -286,12 +313,13 @@ public enum ExLogType : String{
     }
 }
 
+// - MARK: - ログのフォーマット（時刻の表示長・関数名）
 public enum ExLogFormat{
     case Normal
     case Short
     case Raw
     
-    func string(emoji:String, date:Date, msg:Any, functionName:String, classDetail:String, lineNumber:Int) -> String{
+    func string(emoji:String, date:Date, msg:String, functionName:String, classDetail:String, lineNumber:Int) -> String{
         
         // 日時フォーマット
         let dateFormatter = DateFormatter()
