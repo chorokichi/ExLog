@@ -116,6 +116,14 @@ open class ExLog{
         log(object, classFile: classFile, functionName:functionName, lineNumber:lineNumber, type: .Error, format:format)
     }
     
+    open static func important(_ object: Any? = "No Log",
+                           classFile: String = #file,
+                           functionName: String = #function,
+                           lineNumber: Int = #line,
+                           format: ExLogFormat = .Normal){
+        log(object, classFile: classFile, functionName:functionName, lineNumber:lineNumber, type: .Important, format:format)
+    }
+    
     static func printPath(printType: PrintType = .normal)
     {
         let supportDirectory = FileManager.SearchPathDirectory.applicationSupportDirectory
