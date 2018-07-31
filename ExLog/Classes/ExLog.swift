@@ -91,7 +91,8 @@ open class ExLog{
                     functionName: String = #function,
                     lineNumber: Int = #line,
                     type: ExLogType = .Info,
-                    format: ExLogFormat = .Normal)
+                    format: ExLogFormat = .Normal,
+                    printType: PrintType = .normal)
     {
         if Debug{
             
@@ -103,7 +104,7 @@ open class ExLog{
                                           functionName: functionName,
                                           classDetail: classDetail,
                                           lineNumber: lineNumber)
-            output(formatMsg)
+            output(formatMsg, printType:printType)
         }
     }
     
@@ -115,12 +116,12 @@ open class ExLog{
         log(object, classFile: classFile, functionName:functionName, lineNumber:lineNumber, type: .Error, format:format)
     }
     
-    static func printPath()
+    static func printPath(printType: PrintType = .normal)
     {
         let supportDirectory = FileManager.SearchPathDirectory.applicationSupportDirectory
         let searchPathDomainMask = FileManager.SearchPathDomainMask.allDomainsMask
         let directories = NSSearchPathForDirectoriesInDomains(supportDirectory, searchPathDomainMask, true)
-        output(directories.first ?? "見つかりませんでした")
+        output(directories.first ?? "見つかりませんでした", printType:printType)
     }
 }
 
@@ -167,17 +168,31 @@ extension ExLog{
 
 // 出力先制御
 extension ExLog{
-    private static var AppName = "DKMacLibraryTest"
+    private static var AppName = "ExLog"
     private static var FileName = "debug-log.log"
+    
+    public enum PrintType{
+        case normal
+        case dump
+    }
     
     // 直前の表示内容を記録している文字列
     open static var history:String = ""
-    private static func output(_ msg:String){
-        print(msg)
-        if ShouldFileOutput{
-            outputToFile(msg)
+    private static func output(_ msg:String, printType:PrintType = .normal){
+        var printMessage:String = ""
+        switch printType{
+        case .normal:
+            printMessage = msg
+        case .dump:
+            dump(msg, to:&printMessage)
         }
-        history = msg
+        
+        print(printMessage)
+        
+        if ShouldFileOutput{
+            outputToFile(printMessage)
+        }
+        history = printMessage
     }
     
     open static func createOrGetFolderForLog() -> URL?{
