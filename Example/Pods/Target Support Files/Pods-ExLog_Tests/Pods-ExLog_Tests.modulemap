@@ -1,0 +1,6 @@
+framework module Pods_ExLog_Tests {
+  umbrella header "Pods-ExLog_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

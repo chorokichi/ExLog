@@ -28,7 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0DB667AEFFD4AF8D4C691EF7 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		0DB667AEFFD4AF8D4C691EF7 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		2362CD13FBEDA0DBE66C034C /* Pods-ExLog_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExLog_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ExLog_Tests/Pods-ExLog_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		308E2E95125C87BB97165664 /* Pods_ExLog_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExLog_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		34A5F51CC8332C1CDC3453F0 /* Pods-ExLog_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExLog_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ExLog_Example/Pods-ExLog_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -42,8 +42,8 @@
 		607FACE51AFB9204008FA782 /* ExLog_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExLog_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		6EAC947690784C2B7E6CAD73 /* ExLog.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = ExLog.podspec; path = ../ExLog.podspec; sourceTree = "<group>"; };
-		73EC6ADEF96091C5626B51E0 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		6EAC947690784C2B7E6CAD73 /* ExLog.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ExLog.podspec; path = ../ExLog.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		73EC6ADEF96091C5626B51E0 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		7706014DBE5FEB3C8B7E3777 /* Pods-ExLog_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExLog_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-ExLog_Example/Pods-ExLog_Example.release.xcconfig"; sourceTree = "<group>"; };
 		9B96CB52E845801E4F44CFF4 /* Pods-ExLog_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExLog_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ExLog_Tests/Pods-ExLog_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		E4BB2CE5B57F7A5C51B05013 /* Pods_ExLog_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExLog_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
