@@ -1,0 +1,12 @@
+use_frameworks!
+
+target 'ExLog_Example' do
+  pod 'ExLog', :path => '../'
+
+  target 'ExLog_Tests' do
+    inherit! :search_paths
+
+    pod 'Quick', '~> 1.2.0'
+    pod 'Nimble', '~> 7.0.2'
+  end
+end
