@@ -17,7 +17,8 @@ ExLog is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'ExLog'
+// 公開していないので"pod 'ExLog'"ではインストールできず、レポジトリを指定する必要がある
+pod 'ExLog', :git => 'https://github.com/chorokichi/ExLog.git'
 ```
 
 ## Author
