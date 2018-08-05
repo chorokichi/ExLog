@@ -122,6 +122,8 @@
 		F4BD249C60F21F5E0F7C1FAC8A5BC2AF /* BeIdenticalTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9DA3454B15DE38784FA22A452C0121 /* BeIdenticalTo.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		F4C186E57F3D2A35195A00B677979B46 /* Pods-ExLog_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D299FC27C79593E8E61AB245BCD1F85 /* Pods-ExLog_Example-dummy.m */; };
 		F9649DD59BAEE88C6864EEFE73ECA88C /* AdapterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5378FB44B13DD72D6D9510C786BA96C5 /* AdapterProtocols.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
+		FA0085582116DFD900DFC726 /* ExLogFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0085572116DFD900DFC726 /* ExLogFormat.swift */; };
+		FA00855A2116E00200DFC726 /* ExLogType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0085592116E00200DFC726 /* ExLogType.swift */; };
 		FA2E5BAD2110001100820EF9 /* ExLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E5BAC2110001100820EF9 /* ExLog.swift */; };
 		FB433A84B0A557CD5E5948A8B6705024 /* DSL.h in Headers */ = {isa = PBXBuildFile; fileRef = 2294B6CCB2D8D93AE1F605AAA6A03240 /* DSL.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FD5E3A7AB8B0DAF5335C81D8E5E02E37 /* Pods-ExLog_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A2B100AA5347C7302AE8A0CBB95EE16 /* Pods-ExLog_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -307,6 +309,8 @@
 		F26CDCC70B606D6F603DF1399FF1731B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		F2C33F4DC31A8120E8743B2A6163585F /* BeAnInstanceOf.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeAnInstanceOf.swift; path = Sources/Nimble/Matchers/BeAnInstanceOf.swift; sourceTree = "<group>"; };
 		F4C7D6328493B73EF741AC61F4CEF01E /* QuickSelectedTestSuiteBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QuickSelectedTestSuiteBuilder.swift; path = Sources/Quick/QuickSelectedTestSuiteBuilder.swift; sourceTree = "<group>"; };
+		FA0085572116DFD900DFC726 /* ExLogFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExLogFormat.swift; path = ExLog/Classes/ExLogFormat.swift; sourceTree = "<group>"; };
+		FA0085592116E00200DFC726 /* ExLogType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExLogType.swift; path = ExLog/Classes/ExLogType.swift; sourceTree = "<group>"; };
 		FA2E5BAC2110001100820EF9 /* ExLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExLog.swift; path = ExLog/Classes/ExLog.swift; sourceTree = "<group>"; };
 		FFAF9123785B03C6F310101DF99E09C4 /* Pods-ExLog_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ExLog_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		FFEC45940EDF81A015EC6533CF748AC1 /* Pods-ExLog_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ExLog_Tests-resources.sh"; sourceTree = "<group>"; };
@@ -633,6 +637,8 @@
 			isa = PBXGroup;
 			children = (
 				FA2E5BAC2110001100820EF9 /* ExLog.swift */,
+				FA0085572116DFD900DFC726 /* ExLogFormat.swift */,
+				FA0085592116E00200DFC726 /* ExLogType.swift */,
 				412F612AA356A168A5BDE2E5225C06B4 /* Pod */,
 				D043CF9875F130FCB2C5B20B9D2E9361 /* Support Files */,
 			);
@@ -833,6 +839,8 @@
 			files = (
 				04E55471167EA50788162D2D6861BC37 /* ExLog-dummy.m in Sources */,
 				FA2E5BAD2110001100820EF9 /* ExLog.swift in Sources */,
+				FA0085582116DFD900DFC726 /* ExLogFormat.swift in Sources */,
+				FA00855A2116E00200DFC726 /* ExLogType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
