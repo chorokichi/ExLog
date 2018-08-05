@@ -108,12 +108,41 @@ open class ExLog{
                       type:type)
         }
     }
+}
+
+
+// - MARK: - ExLogType固定のクラスメソッド
+extension ExLog{
+    open static func error(_ object: Any? = "No Log",
+                           classFile: String = #file,
+                           functionName: String = #function,
+                           lineNumber: Int = #line,
+                           format: ExLogFormat = .Normal){
+        log(object, classFile: classFile, functionName:functionName, lineNumber:lineNumber, type: .Error, format:format)
+    }
+    
+    open static func fatalError(_ object: Any? = "No Log",
+                           classFile: StaticString = #file,
+                           functionName: String = #function,
+                           lineNumber: UInt = #line,
+                           format: ExLogFormat = .Normal){
+        error(object, classFile: "\(classFile)", functionName:functionName, lineNumber:Int(lineNumber), format:format)
+        assertionFailure(String(describing: object), file: classFile, line: lineNumber)
+    }
+    
+    open static func important(_ object: Any? = "No Log",
+                               classFile: String = #file,
+                               functionName: String = #function,
+                               lineNumber: Int = #line,
+                               format: ExLogFormat = .Normal){
+        log(object, classFile: classFile, functionName:functionName, lineNumber:lineNumber, type: .Important, format:format)
+    }
     
     /// メソッド名をログに出力
     open static func method(classFile: String = #file,
-                         functionName: String = #function,
-                         lineNumber: Int = #line,
-                         type: ExLogType = .Info){
+                            functionName: String = #function,
+                            lineNumber: Int = #line,
+                            type: ExLogType = .Info){
         if Debug{
             let msg = functionName
             ExLog.log(msg,
@@ -148,27 +177,7 @@ open class ExLog{
     }
 }
 
-
-// - MARK: - ExLogType固定のクラスメソッド
-extension ExLog{
-    open static func error(_ object: Any? = "No Log",
-                           classFile: String = #file,
-                           functionName: String = #function,
-                           lineNumber: Int = #line,
-                           format: ExLogFormat = .Normal){
-        log(object, classFile: classFile, functionName:functionName, lineNumber:lineNumber, type: .Error, format:format)
-    }
-    
-    open static func important(_ object: Any? = "No Log",
-                               classFile: String = #file,
-                               functionName: String = #function,
-                               lineNumber: Int = #line,
-                               format: ExLogFormat = .Normal){
-        log(object, classFile: classFile, functionName:functionName, lineNumber:lineNumber, type: .Important, format:format)
-    }
-}
-
-// - MARK: - Util系
+// - MARK: - Util系（ログ出力はしない）
 extension ExLog{
     // CoreDataのファイルなどを保存するフォルダーのパスを取得するメソッド
     open static func getFolderPathHavingCoreDataFile() -> String
