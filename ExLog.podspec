@@ -8,35 +8,19 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ExLog'
-  s.version          = '0.1.4'
+  s.version          = '0.1.5'
   s.summary          = 'iOS用簡易ログライブラリー'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
-
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+ログ出力をサポートするライブラリー。フォーマットされたログをコンソール及びファイルとして出力することが可能。
+ファイルはExLog/Debugが有効なときのみdocumentDirectory下にdebug-log.logとして作成される。
                        DESC
 
   s.homepage         = 'https://github.com/chorokichi/ExLog.git'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Chorokichi' => 'kdy.developer@gmail.com' }
   s.source           = { :git => 'https://github.com/chorokichi/ExLog.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
-
+  s.swift_version = '4.1'
   s.source_files = 'ExLog/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'ExLog' => ['ExLog/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
 end

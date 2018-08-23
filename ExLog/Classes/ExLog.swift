@@ -11,11 +11,11 @@ import Foundation
 open class ExLog{
     
     // ファイルにログを出力するかどうか
-    private static var ShouldFileOutput = true
+    fileprivate static var ShouldFileOutput = true
     #if DEBUG
-    private static let Debug = true
+    fileprivate static let Debug = true
     #else
-    private static let Debug = false
+    fileprivate static let Debug = false
     #endif
     
     /// 初期設定。AppDelegateのapplicationDidFinishLaunchingで呼び出すことを想定している
@@ -220,8 +220,8 @@ extension ExLog{
 
 // - MARK: - 出力先制御
 extension ExLog{
-    private static var AppName = "ExLog"
-    private static var FileName = "debug-log.log"
+    fileprivate static var AppName = "ExLog"
+    fileprivate static var FileName = "debug-log.log"
     
     public enum PrintType{
         case normal
@@ -230,7 +230,7 @@ extension ExLog{
     
     // 直前の表示内容を記録している文字列
     open static var history:String = ""
-    private static func output(_ msg:String, printType:PrintType = .normal){
+    fileprivate static func output(_ msg:String, printType:PrintType = .normal){
         print(msg)
         if ShouldFileOutput{
             outputToFile(msg)
