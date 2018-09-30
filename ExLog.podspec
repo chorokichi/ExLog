@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ExLog'
-  s.version          = '0.1.5'
+  s.version          = '0.2.0'
   s.summary          = 'iOS用簡易ログライブラリー'
   s.description      = <<-DESC
 ログ出力をサポートするライブラリー。フォーマットされたログをコンソール及びファイルとして出力することが可能。
@@ -21,6 +21,6 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/chorokichi/ExLog.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.0'
-  s.swift_version = '4.1'
+  s.swift_version = '4.2'
   s.source_files = 'ExLog/Classes/**/*'
 end
