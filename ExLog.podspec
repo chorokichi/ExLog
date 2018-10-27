@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ExLog'
-  s.version          = '0.2.0'
+  s.version          = '0.3.0'
   s.summary          = 'iOS用簡易ログライブラリー'
   s.description      = <<-DESC
 ログ出力をサポートするライブラリー。フォーマットされたログをコンソール及びファイルとして出力することが可能。

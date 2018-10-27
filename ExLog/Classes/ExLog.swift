@@ -262,6 +262,32 @@ extension ExLog{
         return folderUrl
     }
     
+    public static func createOrGetFolderForCustomLog() -> URL?{
+        let fm = FileManager.default
+        
+        // ログフォルダーの取得(作成)
+        guard let folderUrl = createOrGetFolderForLog() else{
+            print("Fail to get/create log folder")
+            return nil
+        }
+        
+        // カスタムフォルダーの作成
+        let customFolderUrl = folderUrl.appendingPathComponent("Custom")
+        let path2 = customFolderUrl.path
+        if !fm.fileExists(atPath: path2){
+            print("Not found directory and try to create this dir(\(path2))")
+            do {
+                try fm.createDirectory( atPath: path2, withIntermediateDirectories: true, attributes: nil)
+                print("Created!")
+            } catch {
+                //エラー処理
+                print("Fail to create folder: \(path2)")
+            }
+        }
+        
+        return customFolderUrl
+    }
+    
     public static func getLogFileForLog() -> URL?{
         return createOrGetFolderForLog()?.appendingPathComponent(FileName)
     }
@@ -276,6 +302,39 @@ extension ExLog{
         }
         
         guard let output = OutputStream(url: fileUrl, append: true) else{
+            print("output is nil")
+            return
+        }
+        
+        output.open()
+        
+        defer{
+            output.close()
+        }
+        
+        guard let data = (msg + "\n").data(using: .utf8, allowLossyConversion: false) else{
+            return
+        }
+        let result = data.withUnsafeBytes {
+            output.write($0, maxLength: data.count)
+        }
+        
+        if result <= 0{
+            print("[\(result)]fail to write msg into \(fileUrl)")
+        }
+    }
+    
+    /// msgを"{fileName}.txt"ファイルに保存するためのメソッド。同いファイル名を指定した場合は上書きする。
+    public static func save(_ msg:String, to fileName: String){
+        // To Download this file
+        // iOS: you have to add "Application supports iTunes file sharing=true" flag to info.plist/
+        // MacOS: check Document folder
+        guard let fileUrl = createOrGetFolderForCustomLog()?.appendingPathComponent(fileName + ".txt") else{
+            print("folderUrl is nil")
+            return
+        }
+        
+        guard let output = OutputStream(url: fileUrl, append: false) else{
             print("output is nil")
             return
         }

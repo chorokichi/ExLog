@@ -69,6 +69,11 @@ class LogSpec: QuickSpec {
                 expect(ExLog.history).to(equal("Chorokichi"))
             }
             
+            it("Save Log"){
+                ExLog.save("version 1.0", to: "file01")
+                ExLog.save("version 2.0", to: "file01")
+            }
+            
             it("async pattern"){
                 DispatchQueue.global(qos: .default).asyncAfter(deadline: .now() + 10) {
                     // 0.5秒後に実行する処理
