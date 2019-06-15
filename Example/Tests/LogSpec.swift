@@ -16,18 +16,13 @@ class LogSpec: QuickSpec {
             it("Print dump log"){
                 let dic = ["1":"test", "2":"test2"]
                 ExLog.log(dic, printType: .dump)
-                
-                let expected = """
-▿ Optional(["2": "test2", "1": "test"])
-  ▿ some: 2 key/value pairs
-    ▿ (2 elements)
-      - key: "2"
-      - value: "test2"
-    ▿ (2 elements)
-      - key: "1"
-      - value: "test"
-"""
-                expect(ExLog.history).to(contain(expected))
+                expect(ExLog.history).to(contain("Optional"))
+                expect(ExLog.history).to(contain("""
+["1": "test", "2": "test2"]
+"""))
+                expect(ExLog.history).to(contain("""
+some: 2 key/value pairs
+"""))
             }
             it("Call log method and confirm there are no issues"){
                 let msg = "Test"
