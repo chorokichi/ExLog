@@ -18,7 +18,10 @@ class LogSpec: QuickSpec {
                 ExLog.log(dic, printType: .dump)
                 expect(ExLog.history).to(contain("Optional"))
                 expect(ExLog.history).to(contain("""
-["1": "test", "2": "test2"]
+"1": "test"
+"""))
+                expect(ExLog.history).to(contain("""
+"2": "test2"
 """))
                 expect(ExLog.history).to(contain("""
 some: 2 key/value pairs
