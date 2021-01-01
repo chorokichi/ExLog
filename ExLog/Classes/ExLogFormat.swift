@@ -14,7 +14,6 @@ public enum ExLogFormat{
     case Raw
     
     func string(emoji:String, date:Date, msg:String, functionName:String, classDetail:String, lineNumber:Int) -> String{
-        
         // 日時フォーマット
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")

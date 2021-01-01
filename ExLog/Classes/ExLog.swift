@@ -10,7 +10,12 @@ import Foundation
 
 open class ExLog{
     
-    // ファイルにログを出力するかどうか
+    /// ファイルにログを出力するかどうか
+    /// ```
+    /// To Download created file
+    /// iOS: You have to add "Application supports iTunes file sharing=true" flag to info.plist.
+    /// MacOS: Check Document folder
+    /// ```
     fileprivate static var ShouldFileOutput = true
     #if DEBUG
     fileprivate static let Debug = true
@@ -22,7 +27,6 @@ open class ExLog{
     /// - parameter appName: ログファイルを格納するドキュメントフォルダー内のフォルダー名(Init: "DKMacLibraryTest")
     /// - parameter fileName: ログファイル名(Init: "debug-log.log")
     public static func configure(appName:String? = nil, fileName:String? = nil, shouldFileOutput:Bool? = nil){
-        
         if let appName = appName{
             AppName = appName
         }
@@ -35,31 +39,42 @@ open class ExLog{
     }
     
     /// ログを出力するクラスメソッド
+    /// - Parameters:
+    ///   - object: 出力対象。
+    ///   - classFile: クラスファイルパス。指定しなければ自動的に呼び出し元のファイルパスが代入される。
+    ///   - functionName: 関数名。指定しなければ自動的に呼び出し元の関数名が代入される。
+    ///   - lineNumber: 行数。指定しなければ自動的に呼び出し元の行数が代入される。
+    ///   - type: 出力ログのタイプ。先頭のタグが変わるだけ。
+    ///   - format: 出力ログのフォーマット（時刻の表示長・関数名の有無を決定する）
+    ///   - printType: objectをどのように出力するかを決める形式。
     public static func log(_ object: Any? = "No Log",
                          classFile: String = #file,
                          functionName: String = #function,
                          lineNumber: Int = #line,
                          type: ExLogType = .Info,
                          format: ExLogFormat = .Normal,
-                         printType: PrintType = .normal)
-    {
-        
-        if Debug{
-            let now = Date()
-            
-            let mainMessage = convert(object, by: printType)
-            let classDetail = URL(string: String(classFile))?.lastPathComponent  ?? classFile
-            logFormatMsg(mainMessage,
-                date: now,
-                classDetail: classDetail,
-                functionName: functionName,
-                lineNumber: lineNumber,
-                type: type,
-                format: format,
-                printType: printType)
+                         printType: PrintType = .normal){
+        guard Debug else{
+            return
         }
+        
+        let now = Date()
+        
+        let mainMessage = convert(object, by: printType)
+        let classDetail = URL(string: String(classFile))?.lastPathComponent  ?? classFile
+        logFormatMsg(mainMessage,
+            date: now,
+            classDetail: classDetail,
+            functionName: functionName,
+            lineNumber: lineNumber,
+            type: type,
+            format: format,
+            printType: printType)
     }
     
+    /// Any型のObjectを文字列型に変換する。
+    /// - タイプがnormalの場合：そのままdescription(ただしnilはnilという文字列)を文字列として返す
+    /// - タイプがdumpの場合：dumpメソッドを使って文字列を生成して返す
     private static func convert(_ object:Any?, by type:PrintType) -> String{
         var printMessage:String = ""
         switch type{
@@ -99,14 +114,16 @@ open class ExLog{
                          functionName: String = #function,
                          lineNumber: Int = #line,
                          type: ExLogType = .Info, _ runOnDebug:() -> Any?){
-        if Debug{
-            let msg = runOnDebug()
-            ExLog.log(msg,
-                      classFile:classFile,
-                      functionName:functionName,
-                      lineNumber:lineNumber,
-                      type:type)
+        guard Debug else{
+            return
         }
+        
+        let msg = runOnDebug()
+        ExLog.log(msg,
+                  classFile:classFile,
+                  functionName:functionName,
+                  lineNumber:lineNumber,
+                  type:type)
     }
 }
 
@@ -143,14 +160,15 @@ extension ExLog{
                             functionName: String = #function,
                             lineNumber: Int = #line,
                             type: ExLogType = .Info){
-        if Debug{
-            let msg = functionName
-            ExLog.log(msg,
-                      classFile:classFile,
-                      functionName:functionName,
-                      lineNumber:lineNumber,
-                      type:type)
+        guard Debug else{
+            return
         }
+        let msg = functionName
+        ExLog.log(msg,
+                  classFile:classFile,
+                  functionName:functionName,
+                  lineNumber:lineNumber,
+                  type:type)
     }
     
     /// 改行を指定個出力するクラスメソッド
@@ -324,7 +342,7 @@ extension ExLog{
         }
     }
     
-    /// msgを"{fileName}.txt"ファイルに保存するためのメソッド。同いファイル名を指定した場合は上書きする。
+    /// msgを"{fileName}.txt"ファイルに保存するためのメソッド。同じファイル名を指定した場合は追記ではなく上書きする。
     public static func save(_ msg:String, to fileName: String){
         // To Download this file
         // iOS: you have to add "Application supports iTunes file sharing=true" flag to info.plist/
