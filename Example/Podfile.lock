@@ -1,7 +1,7 @@
 PODS:
-  - ExLog (0.3.1)
-  - Nimble (8.0.2)
-  - Quick (2.1.0)
+  - ExLog (0.3.2)
+  - Nimble (9.0.0)
+  - Quick (3.0.0)
 
 DEPENDENCIES:
   - ExLog (from `../`)
@@ -9,7 +9,7 @@ DEPENDENCIES:
   - Quick
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Nimble
     - Quick
 
@@ -18,10 +18,10 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  ExLog: 5a44ab49c304c336be005f1619a0e08480e6fb3b
-  Nimble: 622629381bda1dd5678162f21f1368cec7cbba60
-  Quick: 4be43f6634acfa727dd106bdf3929ce125ffa79d
+  ExLog: 63ba09edeec69aa198734d659c3ba1b3b15d9857
+  Nimble: 3b4ec3fd40f1dc178058e0981107721c615643d8
+  Quick: 6d9559f40647bc4d510103842ef2fdd882d753e2
 
 PODFILE CHECKSUM: 4f8ac5520e1e2c4ab29916a89f64aeb18e926785
 
-COCOAPODS: 1.7.0.beta.3
+COCOAPODS: 1.10.0
