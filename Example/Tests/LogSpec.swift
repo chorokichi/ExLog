@@ -80,8 +80,8 @@ class LogSpec: QuickSpec {
                     // 0.5秒後に実行する処理
                     ExLog.log("Async Log")
                 }
-                expect(ExLog.history).toEventually(contain("Async"), timeout: 15)
-                expect(ExLog.history).toEventually(contain("Sub "), timeout: 15)
+                expect(ExLog.history).toEventually(contain("Async"), timeout: .seconds(15))
+                expect(ExLog.history).toEventually(contain("Sub "), timeout: .seconds(15))
             }
         }
     }
