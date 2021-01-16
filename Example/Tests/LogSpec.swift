@@ -83,6 +83,40 @@ class LogSpec: QuickSpec {
                 expect(ExLog.history).toEventually(contain("Async"), timeout: .seconds(15))
                 expect(ExLog.history).toEventually(contain("Sub "), timeout: .seconds(15))
             }
+            
+            context("Thread"){
+                threadTest()
+            }
+        }
+    }
+    
+    private func threadTest(){
+        it("10x2"){
+            let Size = 500
+            var calledThread: [Bool] = []
+            let sem = DispatchSemaphore(value: 1)
+            func changeTrue(_ index: Int){
+                defer { sem.signal() }
+                sem.wait()
+                calledThread[index] = true
+            }
+            for i in 0 ..< Size{
+                let num = i
+                calledThread.append(false)
+                calledThread.append(false)
+                DispatchQueue.global(qos: .userInteractive).async {
+                    ExLog.log("[userInteractive] \(String(format: "%2d", 2*num)) log: \(Thread.current)")
+                    changeTrue(2*num)
+                }
+                DispatchQueue.global(qos: .userInitiated).async {
+                    ExLog.log("[userInitiated] \(String(format: "%2d", 2*num+1)) log: \(Thread.current)")
+                    changeTrue(2*num+1)
+                }
+            }
+            
+            for i in 0 ..< Size*2{
+                expect(calledThread[i]).toEventually(beTrue(), timeout: .seconds(5))
+            }
         }
     }
 }
