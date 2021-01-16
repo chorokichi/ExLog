@@ -1,5 +1,5 @@
 PODS:
-  - ExLog (0.3.2)
+  - ExLog (0.4.0)
   - Nimble (9.0.0)
   - Quick (3.0.0)
 
@@ -18,7 +18,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  ExLog: 63ba09edeec69aa198734d659c3ba1b3b15d9857
+  ExLog: 51b9a2ae49ceb6f231c0377b983c4a1b362dd292
   Nimble: 3b4ec3fd40f1dc178058e0981107721c615643d8
   Quick: 6d9559f40647bc4d510103842ef2fdd882d753e2
 
